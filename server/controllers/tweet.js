@@ -30,14 +30,14 @@ export const likeOrDislike = async (req, res, next) => {
   try {
     const tweet = await Tweet.findById(req.params.id);
     if (tweet) {
-      if (!tweet.likes.includes(req.user.id)) {
-        await Tweet.updateOne({
-          $push: { likes: req.user.id },
+      if (!tweet.likes.includes(req.body.id)) {
+        await tweet.updateOne({
+          $push: { likes: req.body.id },
         });
         res.status(200).json("tweet has been liked");
       } else {
         await tweet.updateOne({
-          $pull: { likes: req.user.id },
+          $pull: { likes: req.body.id },
         });
         res.status(200).json("tweet has been disliked");
       }

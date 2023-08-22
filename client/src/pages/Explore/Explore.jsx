@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import RightSidebar from "../../components/RightSidebar/RightSidebar";
-
 
 const Explore = () => {
   return (
@@ -15,6 +14,6 @@ const Explore = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Explore
+export default Explore;

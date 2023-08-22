@@ -11,7 +11,7 @@ import Error from "./pages/Error/Error";
 const Layout = () => {
   return (
     <div className="md:w-8/12 mx-auto">
-      <Navbar/>
+      <Navbar />
       <Outlet></Outlet>
     </div>
   );
@@ -20,30 +20,30 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <Error/>,
+    errorElement: <Error />,
     element: <Layout />,
     children: [
       {
         path: "/",
-        element: <Home/>,
+        element: <Home />,
       },
       {
         path: "/profile/:id",
-        element: <Profile/>
+        element: <Profile />,
       },
       {
         path: "/explore",
-        element: <Explore/>
+        element: <Explore />,
       },
       {
         path: "/signin",
-        element: <Signin/>
+        element: <Signin />,
       },
       {
         path: "/signout",
-        element: <Signin/>
-      }
-    ]
+        element: <Signin />,
+      },
+    ],
   },
 ]);
 

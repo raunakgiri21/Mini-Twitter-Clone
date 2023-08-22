@@ -26,7 +26,7 @@ const TimelineTweet = () => {
         timeline.map((tweet) => {
           return (
             <div key={tweet._id} className="p-2">
-              <Tweet tweet={tweet} setData={setTimeline}/>
+              <Tweet tweet={tweet} setData={setTimeline} />
             </div>
           );
         })}

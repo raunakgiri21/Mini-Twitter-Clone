@@ -35,7 +35,7 @@ const Signin = () => {
       const res = await axios.post("http://localhost:8000/api/auth/signup", {
         username,
         password,
-        email
+        email,
       });
       dispatch(loginSuccess(res.data));
       navigate("/");
