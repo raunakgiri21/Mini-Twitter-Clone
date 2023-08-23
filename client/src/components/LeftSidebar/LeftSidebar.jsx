@@ -3,7 +3,7 @@ import React from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import TagIcon from "@mui/icons-material/Tag";
 import PersonIcon from "@mui/icons-material/Person";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/userSlice";
@@ -12,11 +12,13 @@ const LeftSidebar = () => {
   const { currentUser } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
       dispatch(logout());
+      navigate("/signin");
     } catch (error) {
       console.log(error);
     }
