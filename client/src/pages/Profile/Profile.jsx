@@ -3,10 +3,11 @@ import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import RightSidebar from "../../components/RightSidebar/RightSidebar";
 import Tweet from "../../components/Tweet/Tweet";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import EditProfile from "../../components/EditProfile/EditProfile";
+import { following } from "../../redux/userSlice";
 
 const Profile = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -16,6 +17,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
 
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +35,37 @@ const Profile = () => {
       }
     };
     fetchData();
-  });
+  }, [currentUser, id]);
+
+  const handleFollow = async () => {
+    if (!currentUser.following.includes(id)) {
+      try {
+        const follow = await axios.put(
+          `http://localhost:8000/api/users/follow/${id}`,
+          {
+            id: currentUser._id,
+          },
+          { withCredentials: true }
+        );
+        dispatch(following(id));
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const unfollow = await axios.put(
+          `http://localhost:8000/api/users/unfollow/${id}`,
+          {
+            id: currentUser._id,
+          },
+          { withCredentials: true }
+        );
+        dispatch(following(id));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -44,7 +76,11 @@ const Profile = () => {
 
         <div className="col-span-2 border-x-2 border-t-slate-800 px-6">
           <div className="flex justify-between items-center">
-            <img className="w-12 h-12 rounded-full" alt="Profile Picture" src={userProfile?.profile}/>
+            <img
+              className="w-12 h-12 rounded-full"
+              alt="Profile Picture"
+              src={userProfile?.profile}
+            />
             {currentUser?._id === id ? (
               <button
                 onClick={() => setOpen(true)}
@@ -53,11 +89,17 @@ const Profile = () => {
                 Edit Profile
               </button>
             ) : currentUser?.following.includes(id) ? (
-              <button className="px-4 y-2 bg-blue-500 rounded-full text-white">
+              <button
+                onClick={handleFollow}
+                className="px-4 y-2 bg-blue-500 rounded-full text-white"
+              >
                 Following
               </button>
             ) : (
-              <button className="px-4 y-2 bg-blue-500 rounded-full text-white">
+              <button
+                onClick={handleFollow}
+                className="px-4 y-2 bg-blue-500 rounded-full text-white"
+              >
                 Follow
               </button>
             )}
@@ -78,7 +120,7 @@ const Profile = () => {
           <RightSidebar />
         </div>
       </div>
-      {open && <EditProfile setOpen={setOpen}/>}
+      {open && <EditProfile setOpen={setOpen} />}
     </>
   );
 };

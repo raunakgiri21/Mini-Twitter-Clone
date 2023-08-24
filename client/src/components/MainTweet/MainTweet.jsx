@@ -26,8 +26,7 @@ const MainTweet = () => {
 
   return (
     <div>
-      {currentUser && <p className="font-bold pl-2 my-2">username</p>}
-      <p className="font-bold pl-2 my-2">username</p>
+      {currentUser && <p className="font-bold pl-2 my-2">{currentUser.username}</p>}
       <form action="" className="border-b-2 pb-6">
         <textarea
           onChange={(e) => setTweetText(e.target.value)}

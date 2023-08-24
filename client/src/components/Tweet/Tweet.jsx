@@ -35,7 +35,7 @@ const Tweet = ({ tweet, setData }) => {
     e.preventDefault();
     try {
       const like = await axios.put(
-        `http://localhost:8000/api/tweets/${tweet._id}/like`,
+        `http://localhost:8000/api/tweets/${tweet?._id}/like`,
         { id: currentUser._id },
         { withCredentials: true }
       );
@@ -52,7 +52,7 @@ const Tweet = ({ tweet, setData }) => {
         setData(newData.data);
       } else {
         const newData = await axios.get(
-          `http://localhost:8000/api/tweets/timeline/${currentUser._id}`
+          `http://localhost:8000/api/tweets/timeline/${currentUser?._id}`
         );
         setData(newData.data);
       }
@@ -66,15 +66,15 @@ const Tweet = ({ tweet, setData }) => {
       {userData && (
         <>
           <div className="flex space-x-2">
-            <Link to={`/profile/${userData._id}`}>
-              <h3 className="font-bold">{userData.username}</h3>
+            <Link to={`/profile/${userData?._id}`}>
+              <h3 className="font-bold">{userData?.username}</h3>
             </Link>
-            <span className="font-normal">@{userData.username}</span>
+            <span className="font-normal">@{userData?.username}</span>
             <p> - {dateStr}</p>
           </div>
           <p>{tweet.description}</p>
           <button onClick={handleLike}>
-            {tweet.likes.includes(currentUser._id) ? (
+            {tweet.likes.includes(currentUser?._id) ? (
               <FavoriteIcon className="mr-2 my-2 cursor-pointer"></FavoriteIcon>
             ) : (
               <FavoriteBorderIcon className="mr-2 my-2 cursor-pointer"></FavoriteBorderIcon>

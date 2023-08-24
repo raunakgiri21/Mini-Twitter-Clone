@@ -28,10 +28,21 @@ export const userSlices = createSlice({
     changeProfile: (state, action) => {
       state.currentUser.profilePicture = action.payload;
     },
+    following: (state, action) => {
+      if (state.currentUser.following.includes(action.payload)) {
+        state.currentUser.following.splice(
+          state.currentUser.following.findIndex(
+            (followingId) => followingId === action.payload
+          )
+        );
+      } else {
+        state.currentUser.following.push(action.payload);
+      }
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout, changeProfile } =
+export const { loginStart, loginSuccess, loginFailure, logout, changeProfile, following } =
   userSlices.actions;
 
 export default userSlices.reducer;
