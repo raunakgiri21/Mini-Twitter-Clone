@@ -11,7 +11,7 @@ const UserPlaceholder = ({ setUserData, userData }) => {
     const fetchData = async () => {
       try {
         const userProfile = await axios.get(
-          `http://localhost:8000/api/users/find/${id}`
+          `${process.env.REACT_APP_API}/users/find/${id}`
         );
         setUserData(userProfile.data);
       } catch (error) {

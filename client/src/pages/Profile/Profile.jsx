@@ -23,10 +23,10 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const userTweets = await axios.get(
-          `http://localhost:8000/api/tweets/user/all/${id}`
+          `${process.env.REACT_APP_API}/tweets/user/all/${id}`
         );
         const userProfile = await axios.get(
-          `http://localhost:8000/api/users/find/${id}`
+          `${process.env.REACT_APP_API}/users/find/${id}`
         );
         setUserTweets(userTweets.data);
         setUserProfile(userProfile.data);
@@ -41,7 +41,7 @@ const Profile = () => {
     if (!currentUser.following.includes(id)) {
       try {
         const follow = await axios.put(
-          `http://localhost:8000/api/users/follow/${id}`,
+          `${process.env.REACT_APP_API}/users/follow/${id}`,
           {
             id: currentUser._id,
           },
@@ -54,7 +54,7 @@ const Profile = () => {
     } else {
       try {
         const unfollow = await axios.put(
-          `http://localhost:8000/api/users/unfollow/${id}`,
+          `${process.env.REACT_APP_API}/users/unfollow/${id}`,
           {
             id: currentUser._id,
           },

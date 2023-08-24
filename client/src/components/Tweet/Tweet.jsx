@@ -21,7 +21,7 @@ const Tweet = ({ tweet, setData }) => {
     const fetchData = async () => {
       try {
         const findUser = await axios.get(
-          `http://localhost:8000/api/users/find/${tweet.userId}`
+          `${process.env.REACT_APP_API}/users/find/${tweet.userId}`
         );
         setuserData(findUser.data);
       } catch (error) {
@@ -35,24 +35,24 @@ const Tweet = ({ tweet, setData }) => {
     e.preventDefault();
     try {
       const like = await axios.put(
-        `http://localhost:8000/api/tweets/${tweet?._id}/like`,
+        `${process.env.REACT_APP_API}/tweets/${tweet?._id}/like`,
         { id: currentUser._id },
         { withCredentials: true }
       );
 
       if (location.includes("profile")) {
         const newData = await axios.get(
-          `http://localhost:8000/api/tweets/user/all/${id}`
+          `${process.env.REACT_APP_API}/tweets/user/all/${id}`
         );
         setData(newData.data);
       } else if (location.includes("explore")) {
         const newData = await axios.get(
-          `http://localhost:8000/api/tweets/explore`
+          `${process.env.REACT_APP_API}/tweets/explore`
         );
         setData(newData.data);
       } else {
         const newData = await axios.get(
-          `http://localhost:8000/api/tweets/timeline/${currentUser?._id}`
+          `${process.env.REACT_APP_API}/tweets/timeline/${currentUser?._id}`
         );
         setData(newData.data);
       }
