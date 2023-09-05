@@ -14,9 +14,9 @@ const __dirname = path.resolve();
 const app = express();
 dotenv.config();
 
-app.get("/", (req, res) => {
-  res.send("hi");
-});
+// app.get("/", (req, res) => {
+//   res.send("hi");
+// });
 
 const connect = () => {
   mongoose
