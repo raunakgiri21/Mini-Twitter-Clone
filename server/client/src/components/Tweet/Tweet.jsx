@@ -21,7 +21,7 @@ const Tweet = ({ tweet, setData }) => {
     const fetchData = async () => {
       try {
         const findUser = await axios.get(
-          `${process.env.REACT_APP_API}/users/find/${tweet.userId}`
+          `/api/users/find/${tweet.userId}`
         );
         setuserData(findUser.data);
       } catch (error) {
@@ -35,24 +35,24 @@ const Tweet = ({ tweet, setData }) => {
     e.preventDefault();
     try {
       const like = await axios.put(
-        `/${process.env.REACT_APP_API}/tweets/${tweet?._id}/like`,
+        `/api/tweets/${tweet?._id}/like`,
         { id: currentUser._id },
         { withCredentials: true }
       );
 
       if (location.includes("profile")) {
         const newData = await axios.get(
-          `/${process.env.REACT_APP_API}/tweets/user/all/${id}`
+          `/api/tweets/user/all/${id}`
         );
         setData(newData.data);
       } else if (location.includes("explore")) {
         const newData = await axios.get(
-          `/${process.env.REACT_APP_API}/tweets/explore`
+          `/api/tweets/explore`
         );
         setData(newData.data);
       } else {
         const newData = await axios.get(
-          `/${process.env.REACT_APP_API}/tweets/timeline/${currentUser?._id}`
+          `/api/tweets/timeline/${currentUser?._id}`
         );
         setData(newData.data);
       }

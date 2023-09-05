@@ -12,7 +12,7 @@ const ExploreTweets = () => {
     const fetchData = async () => {
       try {
         const exploreTweets = await axios.get(
-          `/${process.env.REACT_APP_API}/tweets/explore`
+          `/api/tweets/explore`
         );
         setExplore(exploreTweets?.data);
       } catch (error) {

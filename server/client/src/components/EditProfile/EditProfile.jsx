@@ -72,7 +72,7 @@ const EditProfile = ({ setOpen }) => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
           try {
             const updatedProfile = await axios.put(
-              `${process.env.REACT_APP_API}/users/${currentUser._id}`,
+              `/api/users/${currentUser._id}`,
               {
                 profile: downloadURL,
               },
@@ -90,7 +90,7 @@ const EditProfile = ({ setOpen }) => {
   const handleDelete = async () => {
     try {
       const deleteProfile = await axios.delete(
-        `${process.env.REACT_APP_API}/users/${currentUser._id}`,
+        `/api/users/${currentUser._id}`,
         { withCredentials: true }
       );
       dispatch(logout());

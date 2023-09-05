@@ -18,7 +18,7 @@ const Signin = () => {
     dispatch(loginStart());
     try {
       const res = await axios.post(
-        `/${process.env.REACT_APP_API}/auth/signin`,
+        `/api/auth/signin`,
         {
           username,
           password,
@@ -37,7 +37,7 @@ const Signin = () => {
     dispatch(loginStart());
     try {
       const res = await axios.post(
-        `/${process.env.REACT_APP_API}/auth/signup`,
+        `/api/auth/signup`,
         {
           username,
           password,
