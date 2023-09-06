@@ -23,10 +23,10 @@ const Profile = () => {
     const fetchData = async () => {
       try {
         const userTweets = await axios.get(
-          `/api/tweets/user/all/${currentUser._id}`
+          `/api/tweets/user/all/${id}`
         );
         const userProfile = await axios.get(
-          `/api/users/find/${currentUser._id}`
+          `/api/users/find/${id}`
         );
         setUserTweets(userTweets.data);
         setUserProfile(userProfile.data);
